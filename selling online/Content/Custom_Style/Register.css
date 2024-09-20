@@ -1,0 +1,37 @@
+﻿/* Bao khung và căn giữa form */
+.register-wrapper {
+    width: 400px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 50px auto; /* Căn giữa theo chiều ngang */
+    text-align: center;
+}
+/* Tạo khoảng cách giữa các input */
+.input-box {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+    .input-box input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+/* Style cho button đăng nhập */
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #000000;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+    .btn:hover {
+        background-color: #555555;
+    }
