@@ -43,5 +43,14 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
+    
 }
-
+    .remember-forgot a {
+        color: #000000;
+        text-decoration:none;
+    }
+.register-link a {
+    text-decoration:none ;
+    color: #000000;
+    
+}

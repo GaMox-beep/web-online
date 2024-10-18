@@ -1,0 +1,44 @@
+﻿.product-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9; /* Nền trắng nhẹ */
+    border: 1px solid #ddd;
+}
+
+.product-image img {
+    width: 150px; /* Chiếm toàn bộ chiều rộng của cột */
+    height: auto;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Căn giữa theo chiều dọc */
+}
+
+.product-name {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.product-description {
+    margin-bottom: 30px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.product-buttons {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các nút */
+}
+
+    .product-buttons .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+    }

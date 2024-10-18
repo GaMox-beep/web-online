@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+<link href="~/Content/Custom_Style/Login.css" rel="stylesheet" />
+<main>
+
+    <div class="login-wrapper">
+        <form action="">
+            <h1>LOGIN</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Username" required />
+                <i class='bx bxs-user-rectangle'></i>
+            </div>
+            <div class="input-box"  style="margin-top:5px;">
+                <input type="password" placeholder="Password" required />
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="remember-forgot">
+                <label> <input type="checkbox"> Lưu mật khẩu </label>
+                <b><a href="#"> Forgot password?</a></b>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="register-link">
+                <p>Don't have a account ?          <b><a href="@Url.Action("Register", "Home")">Register here</a></b></p>               
+            </div>
+        </form>
+    </div>
+
+</main>
+
+

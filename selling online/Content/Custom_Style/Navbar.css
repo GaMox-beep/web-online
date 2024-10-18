@@ -1,0 +1,5 @@
+﻿.navbar-logo {
+     /* Chiều cao của hình ảnh */
+    width: auto; /* Giữ tỉ lệ khung hình */
+    display: inline-block; /* Để đảm bảo logo căn giữa tốt hơn */
+}

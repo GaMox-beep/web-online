@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+<script src="~/Scripts/Custom/Cart.js"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+     <link href="~/Content/Custom_Style/ShoppingCart.css" rel="stylesheet" />
+    <style>
+        .navbar-nav .nav-link:hover {
+            background-color: #808080; /* Màu xám khi hover */
+            color: white; /* Giữ màu chữ là trắng */
+            border-radius: 5px; /* Bo tròn nhẹ góc nếu muốn */
+    </style>
+</head>
+<body>
+    <header>
+        <img src="~/Content/Images/logo__2_-removebg-preview.png" style="height:100px;" />
+    </header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark" style="background: linear-gradient(to right,black 60%, #00334d 100%);   ">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between" style="color:white">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("TRANG CHỦ  ", "Index2", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("QUẦN ÁO", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("GIỚI THIỆU", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("LIÊN HỆ", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li>@Html.ActionLink("ĐĂNG NHẬP ", "Login", "Account", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("ĐĂNG KÍ", "Register", "Account", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>
+                        <i class="fas fa-shopping-cart cart-icon" style="cursor:pointer;" onclick="toggleCart()"></i>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid body-content">
+        <div style="min-height:500px;">@RenderBody()</div>
+        <hr />
+        <footer style="background-color: #2C2C2C; color: white; ">
+            <div class="footer">
+                <div class="about-company">
+                    <h5>ABOUT COMPANY</h5>
+                    <p>At HuflitOnline, we're passionate about fashion and committed to delivering exceptional online shopping experiences. Our mission is to provide high-quality, on-trend clothing that's accessible to everyone, regardless of age, style, or budget.</p>
+                    <p>
+                        Please explore our website and experience the convenience of online shopping at its best.
+                    </p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/Cristiano"
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/cristiano/"
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/Cristiano"
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.youtube.com/Cristiano"
+            <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="search-something">
+                    <h5>SEARCH SOMETHING</h5>
+                    <div class="search-box">
+                        <input type="text" placeholder="Search">
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-home"></i> 828 Sư Vạn Hạnh, Phường 13, Quận 10, thành phố Hồ Chí Minh.</p>
+                        <p><i class="fas fa-envelope"></i> huflit@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> 028 3863 2052</p>
+                    </div>
+                </div>
+                <div class="opening-hours">
+                    <h5>OPENING HOURS</h5>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Mon - Thu:</td>
+                                <td>7am - 10pm</td>
+                            </tr>
+                            <tr>
+                                <td>Fri - Sat:</td>
+                                <td>9am - 5am</td>
+                            </tr>
+                            <tr>
+                                <td>Sunday:</td>
+                                <td>9am - 10pm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="copyright" style="text-align:center;">
+                Copyright  ©  2024 |  All  Rights  Reserved.
+            </div>
+
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+    

@@ -1,0 +1,35 @@
+﻿.item {
+    height: 100px auto;
+    background-color: #f8f9fa; /* Màu nền nhạt */
+    margin-right: 10px; /* Khoảng cách giữa các div theo chiều ngang */
+    margin-bottom: 20px; /* Khoảng cách giữa các div theo chiều dọc */
+    padding: 15px; /* Khoảng cách bên trong div */
+    border-radius: 10px; /* Bo tròn các góc của div */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo bóng nhẹ */
+}
+.item p{
+    height:50px;
+}
+.item-price{
+    font-weight:bold;
+}
+.img-thumbnail{
+    height:300px;
+    margin-left:auto;
+    margin-right:auto;
+    display:block
+}
+
+tbody a{
+    text-decoration:none;
+    color:black;
+    font-weight:bold;
+}
+thead{
+    background-color:black;
+}
+thead th{
+    color:white;
+    font-weight:bold;
+
+}
