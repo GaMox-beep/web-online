@@ -30,6 +30,7 @@ namespace selling_online.Models
         public string City { get; set; }
         public string Country { get; set; }
         public string Password { get; set; }
+        public string UserName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

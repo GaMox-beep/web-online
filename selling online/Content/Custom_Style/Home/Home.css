@@ -10,6 +10,14 @@
 .item p{
     height:50px;
 }
+.item a{
+    text-decoration:none;
+    color: black;
+    font-weight:bold;
+}
+.item a :hover{
+
+}
 .item-price{
     font-weight:bold;
 }

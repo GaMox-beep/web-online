@@ -204,11 +204,13 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Custom_Style\Clothing\ClothingDetails.css" />
+    <Content Include="Content\Custom_Style\Home\AboutUs.css" />
     <Content Include="Content\Custom_Style\Home\Home.css" />
     <Content Include="Content\Custom_Style\Login.css" />
     <Content Include="Content\Custom_Style\Register.css" />
     <Content Include="Content\Custom_Style\Navbar.css" />
     <Content Include="Content\Custom_Style\Footer.css" />
+    <Content Include="Content\Images\image.jpg" />
     <Content Include="Content\Images\logo %282%29.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\logo__2_-removebg-preview.png" />

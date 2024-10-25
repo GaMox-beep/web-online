@@ -41,7 +41,9 @@
                             <img src="@item.Image" alt="@item.ProductName" class="img-thumbnail" style="max-width: 100%;">
                             <a href="@Url.Action("ClothingDetails", "Clothing", new { productId = item.ProductID })">
                                 <p>@item.ProductName</p>
-                            </a>                            <p class="item-price">Giá: @item.Price VND</p>
+                            </a>
+                            <p> @item.Category.CategoryName</p>
+                            <p class="item-price">Giá: @item.Price VND</p>
                             <button class="btn btn-success" onclick="addToCart('@item.ProductName')">Thêm vào giỏ</button>
                         </div>
                     </div>

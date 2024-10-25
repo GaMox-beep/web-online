@@ -11,7 +11,7 @@ namespace selling_online.Controllers
     {
 		// GET: Clothing
 		private Database1Entities db = new Database1Entities();
-		public ActionResult ClothingDetails(int ProductID)
+		public ActionResult ClothingDetails     (int ProductID)
         {
            var product=db.Products.FirstOrDefault(p=>p.ProductID == ProductID);
             if (product == null)
