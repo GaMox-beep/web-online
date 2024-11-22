@@ -1,0 +1,34 @@
+﻿@model selling_online.Models.ViewModel.ProductDetailsVM
+@using PagedList.Mvc
+
+<link href="~/Content/Custom_Style/Clothing/ClothingDetails.css" rel="stylesheet" />
+<!-- Hiển thị danh sách sản phẩm -->
+@if (Model.TopProducts != null && Model.TopProducts.Any())
+{
+    <section class="container-fluid listProduct">
+        <h4 style="font-weight: bold;"> Sản phẩm bán chạy</h4>
+        <ul class="list-container">
+            @foreach (var product in Model.TopProducts)
+            {
+                <li class="lproduct-item">
+                    <div>
+                        <!-- Sửa lại URL, dùng dấu ngoặc kép đúng -->
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.ProductID })">
+                            <img src="@Html.DisplayFor(modelItem => product.Image)" alt="@product.ProductName" />
+                        </a>
+                    </div>
+                    <div>
+                        <h5>@Html.DisplayFor(modelItem => product.ProductName)</h5>
+                        <p class="prodSale">@Html.DisplayFor(modelItem => product.Price)</p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </section>
+
+    <!-- Hiển thị phân trang -->
+    <div class="pagination-container">
+        <!-- Sửa lại cú pháp của PagedListPager -->
+        @Html.PagedListPager(Model.TopProducts, page => Url.Action("ProductDetails", "Home", new { id = Model.product.ProductID, quantity = Model.quantity, page }))
+    </div>
+}

@@ -20,7 +20,7 @@
     <header>
         <img src="~/Content/Images/logo__2_-removebg-preview.png" style="height:100px;" />
     </header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark" style="background: linear-gradient(to right,black 60%, #00334d 100%);   ">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark" style="background: linear-gradient(to right,black 60%, #00334d 100%) ;position:sticky ;top:0;width:100%;z-index:99999;   ">
         <div class="container">
             <a class="navbar-brand" href="@Url.Action("Index", "Home")">
 
@@ -31,10 +31,12 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between" style="color:white">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("TRANG CHỦ  ", "Index2", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("TRANG CHỦ", "Index2", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("QUẦN ÁO", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("GIỚI THIỆU", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("LIÊN HỆ", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("DANH MỤC", "Index", "Admin/Categories", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("SẢN PHẨM", "Index", "Admin/Products", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li>@Html.ActionLink("ĐĂNG NHẬP ", "Login", "Account", new { area = "" }, new { @class = "nav-link" })</li>

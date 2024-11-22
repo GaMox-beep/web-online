@@ -1,0 +1,53 @@
+﻿@model selling_online.Models.ViewModel.SearchProductVM
+
+<head>
+    <style>
+        img{
+            height:150px;
+            max-width:150px;
+        }
+    </style>
+</head>
+
+@if (Model.Products!=null && Model.Products.Any())
+{
+    <h2 class="">DANH SÁCH SẢN PHẨM</h2>
+    <table class="table-bg-info table-responsive">
+        <thead>
+            <tr>
+                <th class="bg-info col-md-2">Hình ảnh</th>
+                <th class="bg-info col-md-3">Tên sản phẩm</th>
+                <th class="bg-info col-md-1">Đơn giá </th>
+                <th class="bg-info col-md-1">Danh mục</th>
+                <th class="bg-info col-md-2"></th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td><img src="@Html.DisplayFor(modelItem => product.Image)"</td>
+                    <td> @Html.DisplayFor(modelItem => product.ProductName)</td>
+                    <td> @Html.DisplayFor(modelItem => product.Price)</td>
+                    <td> @Html.DisplayFor(modelItem => product.Category.CategoryName)</td>
+                
+                    <td>
+                        @Html.ActionLink("Cập nhật", "Edit", new { id = product.CategoryID }, new { @class = "btn btn-primary btn-sm" }) |
+                        @Html.ActionLink("Chi tiết", "Details", new { id = product.CategoryID }, new { @class = "btn btn-primary btn-sm" }) |
+                        @Html.ActionLink("Xóa", "Delete", new { id = product.CategoryID }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+               </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+<p> Khong tim thay san pham</p>
+}
+<div class="form-group">
+    <div class="col-md-offset-8 col-md-4">
+        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary btn-sm" })
+    </div>
+</div>

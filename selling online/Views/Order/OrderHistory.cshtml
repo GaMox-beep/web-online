@@ -1,0 +1,102 @@
+﻿@model List<selling_online.Models.ViewModel.OrderHistoryVM>
+<style>
+    .order-summary {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        .order-summary h3 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.5em;
+        }
+
+        .order-summary p {
+            margin: 4px 0;
+            color: #555;
+        }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+        background-color: #fff;
+        table-layout: fixed;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+
+        .table th {
+            background-color: dodgerblue;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #eaf3ff;
+        }
+
+        .table td {
+            color: #333;
+        }
+
+            .table td:nth-child(4), .table td:nth-child(3) {
+                text-align: right;
+                font-weight: bold;
+            }
+
+</style>
+<h2>Lịch sử đơn hàng</h2>
+
+@if (!Model.Any())
+{
+    <p>Bạn chưa có đơn hàng nào.</p>
+}
+else
+{
+    foreach (var order in Model)
+    {
+        <div class="order-summary">
+            <h3>Đơn hàng #@order.OrderId</h3>
+            <p>Ngày đặt hàng: @order.OrderDate.ToString("dd/MM/yyyy")</p>
+            <p>Tổng tiền: @order.TotalAmount.ToString("N0")VNĐ</p>
+            <p>Trạng thái: @order.Status</p>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Tổng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var detail in order.OrderDetails)
+                    {
+                        <tr>
+                            <td>@detail.Product.ProductName</td>
+                            <td>@detail.Quantity</td>
+                            <td>@detail.UnitPrice.ToString("N0") VNĐ</td>
+                            <td>@(detail.TotalPrice?.ToString("N0") ?? "0") VNĐ</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}

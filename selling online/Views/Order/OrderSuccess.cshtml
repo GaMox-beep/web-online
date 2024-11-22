@@ -1,0 +1,62 @@
+﻿@using selling_online.Models
+@{
+    ViewBag.Title = "Đặt hàng thành công";
+}
+
+<link href="~/Content/Custom_Style/Checkout/Checkout.css" rel="stylesheet" />
+<div class="container">
+    <h2>Đặt hàng thành công!</h2>
+    <div class="success-message">
+        <p>Cảm ơn bạn đã đặt hàng tại cửa hàng của chúng tôi!</p>
+        <p>Đơn hàng của bạn đã được xử lý thành công.</p>
+    </div>
+    <div class="checkout-footer">
+        <p>Để theo dõi trạng thái đơn hàng, xin vui lòng kiểm tra email của bạn.</p>
+        <p>Quay lại <a href="@Url.Action("Index", "Home")">trang chủ.</p>
+    </div>
+</div>
+
+<style>
+    .success-message {
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: green;
+    }
+
+    .order-details {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+        .order-details h4 {
+            margin-bottom: 15px;
+        }
+
+        .order-details ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .order-details li {
+            margin-bottom: 10px;
+        }
+
+    .checkout-footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 14px;
+    }
+
+    .container {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+</style>

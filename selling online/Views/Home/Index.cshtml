@@ -1,7 +1,10 @@
 ﻿@using selling_online.Models
+@using PagedList.Mvc;
+@using PagedList;
 @{
     ViewBag.Title = "Trang chính";
 }
+
 <link href="~/Content/Custom_Style/Home/Home.css" rel="stylesheet" />
 <div class="row">
     <div class="col-md-3">
@@ -10,7 +13,7 @@
                 <tr>
                     <th>Loại sản phẩm</th>
                 </tr>
-            </thead>    
+            </thead>
             <tbody>
                 <tr>
                     <td><a href="@Url.Action("Index", "Home", new { categoryId = 2 }) ">Áo</a></td>
@@ -19,10 +22,10 @@
                     <td><a href="@Url.Action("Index", "Home", new { categoryId = 3 }) ">Quần</a></td>
                 </tr>
                 <tr>
-                    <td><a href="@Url.Action("Index", "Home", new { categoryId = 1 }) ">Mũ</a></td>
+                    <td><a href="@Url.Action("Index", "Home", new { categoryId = 4 }) ">Mũ</a></td>
                 </tr>
                 <tr>
-                    <td><a href="@Url.Action("Index", "Home")" >Tất cả sản phẩm</a></td>
+                    <td><a href="@Url.Action("Index", "Home")">Tất cả sản phẩm</a></td>
                 </tr>
             </tbody>
         </table>
@@ -32,21 +35,24 @@
     <div class="col-md-9">
         <h3>Sản phẩm</h3>
         <div class="row">
-            @if (ViewBag.Items != null && ViewBag.Items.Count > 0)
+            @if (ViewBag.Items != null && (ViewBag.Items as IPagedList<Product>).Count > 0)
             {
-                foreach (var item in ViewBag.Items as List<selling_online.Models.Product>)
+                foreach (var item in ViewBag.Items as IPagedList<Product>) // Sửa để ép kiểu đúng
                 {
                     <div class="col-md-4">
                         <div class="item">
-                            <img src="@item.Image" alt="@item.ProductName" class="img-thumbnail" style="max-width: 100%;">
-                            <a href="@Url.Action("ClothingDetails", "Clothing", new { productId = item.ProductID })">
-                                <p>@item.ProductName</p>
+                            <a href="@Url.Action("ProductDetails", "Home", new { id = item.ProductID, quantity=1 })">
+                                <img src="@item.Image" alt="@item.ProductName" class="img-thumbnail" style="max-width: 100%;">
                             </a>
-                            <p> @item.Category.CategoryName</p>
+                            <p>@item.ProductName</p>
+                            <p>@item.Category.CategoryName</p>
                             <p class="item-price">Giá: @item.Price VND</p>
-                            <button class="btn btn-success" onclick="addToCart('@item.ProductName')">Thêm vào giỏ</button>
+                            <button onclick="window.location.href='@Url.Action("AddToCart", "Cart", new { id = item.ProductID })'" class="btn btn-primary">
+                                Thêm vào giỏ hàng
+                            </button>
                         </div>
                     </div>
+
                 }
             }
             else
@@ -54,5 +60,23 @@
                 <p>Không có sản phẩm nào thuộc danh mục này.</p>
             }
         </div>
+        <div class="pagination-container">
+            @Html.PagedListPager(
+                (IPagedList)ViewBag.Items,
+                page => Url.Action("Index", new { page, categoryId = ViewBag.SelectedCategoryId }),
+                 new PagedListRenderOptions
+                 {
+                   
+                     ContainerDivClasses = new[] { "pagination-container" },
+                     UlElementClasses = new[] { "pagination" },
+                     LiElementClasses = new[] { "page-item" } // Class cho thẻ <li>
+
+
+                 }
+            )
+        </div>
+
+
+
     </div>
 </div>

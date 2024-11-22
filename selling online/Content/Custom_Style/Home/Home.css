@@ -41,3 +41,37 @@ thead th{
     font-weight:bold;
 
 }
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    display: inline-flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+    .pagination .page-item {
+        margin: 0 5px; /* Khoảng cách giữa các ô vuông */
+    }
+
+        .pagination .page-item a,
+        .pagination .page-item span {
+            display: block;
+            padding: 8px 12px; /* Kích thước ô vuông */
+            border: 1px solid #ddd;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px; /* Bo tròn các góc ô vuông */
+            min-width: 35px;
+            text-align: center;
+        }
+
+            .pagination .page-item.active a,
+            .pagination .page-item a:hover {
+                background-color: #007bff;
+                color: white;
+                border-color: #007bff;
+            }

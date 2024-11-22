@@ -6,9 +6,8 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-<script src="~/Scripts/Custom/Cart.js"></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-     <link href="~/Content/Custom_Style/ShoppingCart.css" rel="stylesheet" />
+     <link href="~/Content/Custom_Style/Footer.css" rel="stylesheet" />
     <style>
         .navbar-nav .nav-link:hover {
             background-color: #808080; /* Màu xám khi hover */
@@ -16,14 +15,71 @@
             border-radius: 5px; /* Bo tròn nhẹ góc nếu muốn */
             
         }
+        .video-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+            .video-container video {
+                width: 50%;
+                height: 50%;
+            }
+
+        .logoweb {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0; /* khoảng cách trên và dưới, tùy chỉnh nếu cần */
+            width: 100%; /* Đảm bảo phần tử logo chiếm toàn bộ chiều ngang */
+        }
+            .logoweb img {
+                transform: scale(1.5); /* Điều chỉnh giá trị scale theo mong muốn, ví dụ 1.2 là tăng 20% kích thước */
+                max-width: 100%; /* Đảm bảo logo không vượt quá kích thước của div */
+            }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+
+   
+
+      
         
     </style>
 </head>
 <body>
     <header>
-        <img src="~/Content/Images/logo__2_-removebg-preview.png" style="height:100px;" />
+
+        <div class="logoweb">
+            <img src="~/Content/Images/logo__2_-removebg-preview.png" style="height:100px;" />
+        </div>
+
     </header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark" style="background: linear-gradient(to right,black 60%, #00334d 100%);   ">
+    @if (ViewContext.RouteData.Values["action"].ToString() == "Index2" && ViewContext.RouteData.Values["controller"].ToString() == "Home")
+    {
+        <div class="video-container">
+            <video autoplay muted loop style="width: 100%; height: auto;">
+                <source src="~/assets/Hero Pages/Nike ads Motion Graphics.mp4" type="video/mp4">
+                Trình duyệt của bạn không hỗ trợ video.
+            </video>
+        </div>
+    }
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark" style="background: linear-gradient(to right,black 60%, #00334d 100%) ;position:sticky ;top:0;width:100%;z-index:9999;   ">
         <div class="container">
             <a class="navbar-brand" href="@Url.Action("Index", "Home")">
 
@@ -35,17 +91,35 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between" style="color:white">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("TRANG CHỦ  ", "Index2", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("QUẦN ÁO", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("SẢN PHẨM", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("GIỚI THIỆU", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("LIÊN HỆ", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li>@Html.ActionLink("ĐĂNG NHẬP ", "Login", "Account", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("ĐĂNG KÍ", "Register", "Account", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>
-                        <i class="fas fa-shopping-cart cart-icon" style="cursor:pointer;" onclick="toggleCart()"></i>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a class="nav-link" href="#">@User.Identity.Name</a> <!-- Hiển thị tên tài khoản -->
+                                <div class="dropdown-content">
+                                    <a href="@Url.Action("Profile","Account")">Thông tin tài khoản    </a>
+                                    <a href="@Url.Action("OrderHistory","Order")">Lịch sử mua hàng</a>
+                                    <a href="@Url.Action("Logout", "Account")">Đăng xuất</a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("ĐĂNG NHẬP", "Login", "Account", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("ĐĂNG KÍ", "Register", "Account", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="nav-link"><a href="~/Cart/Index"><i class="fas fa-shopping-cart"></i></a></li>
+                    }
                 </ul>
+
+
+
 
             </div>
         </div>
@@ -53,61 +127,62 @@
     <div class="container-fluid body-content">
         <div style="min-height:500px;">@RenderBody()</div>
         <hr />
-        <footer style="background-color: #2C2C2C; color: white; ">
-            <div class="footer">
-                <div class="about-company">
-                    <h5>ABOUT COMPANY</h5>
-                    <p>At HuflitOnline, we're passionate about fashion and committed to delivering exceptional online shopping experiences. Our mission is to provide high-quality, on-trend clothing that's accessible to everyone, regardless of age, style, or budget.</p>
-                    <p>
-                        Please explore our website and experience the convenience of online shopping at its best.
-                    </p>
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/Cristiano"
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/cristiano/"
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="https://x.com/Cristiano"
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.youtube.com/Cristiano"
-            <a href="#"><i class="fab fa-youtube"></i></a>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col">
+                        <h4>company</h4>
+                        <ul>
+                            <li><a href="#">At HuflitOnline, we're passionate about fashion and committed to delivering exceptional online shopping experiences.</a></li>
+                            <li><a href="#">Our mission is to provide high-quality, on-trend clothing that's accessible to everyone, regardless of age, style, or budget.</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>online shop</h4>
+                        <ul>
+                            <li><a href="#">Hat</a></li>
+                            <li><a href="#">Shoes</a></li>
+                            <li><a href="#">Shirt</a></li>
+                            <li><a href="#">T-shirt</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>follow and contact to us</h4>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-home"></i> Sư Vạn Hạnh, Phường 13, Quận 10, thành phố Hồ Chí Minh.</a>
+                            <li><a href="#"><i class="fas fa-envelope"></i> Huflit@gmail.com</a>
+                            <li>
+                                <a href="#"><i class="fas fa-phone"></i> 028 3863 2052</a>
+                                <ul>
+                                    <div class="social-links">
+                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                        <a href="#"><i class="fab fa-instagram"></i></a>
+                                        <a href="#"><i class="fab fa-youtube"></i></a>
+                                    </div>
+                                    </ul>
+                                </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Map</h4>
+                        <ul>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4602263428274!2d106.66478987425542!3d10.
+                       776019959202857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13
+                       .1!3m3!1m2!1s0x31752edb765b5c25%3A0x9a3519bdad5a85a3!2z
+                       VHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOZ2_huqFpIG5n4buvIC0gVGluIG
+                       jhu41jIFRQLiBI4buTIENow60gTWluaCAoSFVGTElUKQ!5e0!3m2!1sen!2s
+                       !4v1730094773394!5m2!1sen!2s" width="222" height="222" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </ul>
                     </div>
                 </div>
-                <div class="search-something">
-                    <h5>SEARCH SOMETHING</h5>
-                    <div class="search-box">
-                        <input type="text" placeholder="Search">
-                    </div>
-                    <div class="contact-info">
-                        <p><i class="fas fa-home"></i> 828 Sư Vạn Hạnh, Phường 13, Quận 10, thành phố Hồ Chí Minh.</p>
-                        <p><i class="fas fa-envelope"></i> huflit@gmail.com</p>
-                        <p><i class="fas fa-phone"></i> 028 3863 2052</p>
-                    </div>
                 </div>
-                <div class="opening-hours">
-                    <h5>OPENING HOURS</h5>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Mon - Thu:</td>
-                                <td>7am - 10pm</td>
-                            </tr>
-                            <tr>
-                                <td>Fri - Sat:</td>
-                                <td>9am - 5am</td>
-                            </tr>
-                            <tr>
-                                <td>Sunday:</td>
-                                <td>9am - 10pm</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="copyright" style="text-align:center;">
-                Copyright  ©  2024 |  All  Rights  Reserved.
-            </div>
-
         </footer>
+        <div class="footer-bottom">
+            Copyright  ©  2024 |  All  Rights  Reserved.
+        </div>
+
+
+        
     </div>
 
     @Scripts.Render("~/bundles/jquery")

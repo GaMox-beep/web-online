@@ -1,0 +1,127 @@
+﻿/*BANNER*/
+.Home-header {
+   display:flex;
+    width: 100%;
+    height: auto; /* hoặc height: 400px nếu bạn muốn cố định chiều cao */
+}
+
+
+
+.left-column {
+    width: 15%;
+    /* Đặt màu nền tùy chọn cho dễ nhìn */
+}
+
+.center-column {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+   
+   
+}
+
+.right-column {
+    width: 30%;
+    /* Đặt màu nền tùy chọn cho dễ nhìn */
+}
+.right-column img{
+    width:100%;
+    height:auto;
+    display:block;
+}
+#banner {
+    margin: 0; /* Bỏ margin */
+    padding: 0; /* Bỏ padding */
+}
+
+section#banner img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+}
+
+.banner-content h2 {
+    font-size: 36px;
+    color: red;
+}
+
+#first-hr {
+    border: 2px solid blue;
+    width: 5%;
+}
+
+.banner-content p {
+    color: black;
+    font-weight: bold;
+}
+
+.banner-content {
+    text-align: center;
+}
+
+.bannner-btn {
+    background-color: black;
+    color: white;
+    padding: 4px 10px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+}
+
+
+
+#collection-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    gap: 50px;
+}
+
+    #collection-content h3 {
+        font-size: 14px;
+    }
+
+    #collection-content p {
+        font-size: 12px;
+    }
+
+.collection-item img {
+    width: 400px;
+    height: 400px;
+}
+
+.collection-price {
+    font-weight: bold;
+}
+
+section.container-fluid.searchProd {
+    text-align: center;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.search-icon {
+    padding: 0 10px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-input {
+    border: none;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+}
+

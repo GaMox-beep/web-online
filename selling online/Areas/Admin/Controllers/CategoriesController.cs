@@ -46,20 +46,27 @@ namespace selling_online.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,CategoryName,Description")] Category category)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Categories.Add(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+		public ActionResult Create([Bind(Include = "CategoryID,CategoryName")] Category category)
+		{
+			var existingCategory = db.Categories.FirstOrDefault(c => c.CategoryName == category.CategoryName);
+			if (existingCategory != null)
+			{
+				// Nếu danh mục đã tồn tại, thêm lỗi vào ModelState để hiển thị trong view
+				ModelState.AddModelError("CategoryName", "Danh mục này đã tồn tại.");
+				return View(category);
+			}
+			if (ModelState.IsValid)
+			{
+				db.Categories.Add(category);
+				db.SaveChanges();
+				return RedirectToAction("Index");
+			}
 
-            return View(category);
-        }
+			return View(category);
+		}
 
-        // GET: Admin/Categories/Edit/5
-        public ActionResult Edit(int? id)
+		// GET: Admin/Categories/Edit/5
+		public ActionResult Edit(int? id)
         {
             if (id == null)
             {

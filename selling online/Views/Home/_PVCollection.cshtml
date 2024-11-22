@@ -1,0 +1,36 @@
+﻿@model IEnumerable<selling_online.Models.Product>
+<style>
+    .collection-products {
+        background-color: #f0f0f0; /* Màu xám nhạt */
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .product-item {
+        background-color: #ffffff; /* Màu trắng */
+        border: #ffffff;
+        border-radius: 8px;
+        padding: 16px;
+        margin: 8px;
+        width: 200px;
+    }
+</style>
+<div class="collection-products">
+    <h3>Bộ sưu tập sản phẩm nổi bật</h3>
+    <div class="product-list">
+        @foreach (var product in Model)
+        {
+           <div class="product-item">
+               <p>@product.ProductName</p>
+               <img src="@Url.Content( product.Image)" alt="@product.ProductName" />
+               <p>Giá: @product.Price VNĐ</p>
+           </div>
+        }
+    </div>
+</div>

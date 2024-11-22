@@ -1,0 +1,101 @@
+﻿@model selling_online.Models.ViewModel.ProfileVM
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .profile-header {
+        text-align: center;
+        padding: 20px;
+        background: #000; /* Nền đen */
+        color: #fff; /* Chữ trắng */
+    }
+
+    .form-container {
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background: #fff; /* Nền trắng */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .form-container p {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+    .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            width: 150px; /* Độ rộng cố định cho label */
+            margin-right: 10px;
+            font-weight: bold;
+            text-align: right; /* Căn phải label */
+        }
+
+        .form-group input {
+            flex: 1; /* Chiếm toàn bộ không gian còn lại */
+            padding: 10px;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        background: #000; /* Nền đen */
+        color: #fff; /* Chữ trắng */
+        font-size: 1em;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+
+        button:hover {
+            background: #fff; /* Nền trắng khi hover */
+            color: #000; /* Chữ đen khi hover */
+            border: 1px solid #000; /* Viền đen khi hover */
+        }
+</style>
+
+<div class="profile-header">
+    <h2>Thông tin tài khoản</h2>
+</div>
+
+@using (Html.BeginForm("Profile", "Account", FormMethod.Post))
+{
+    <div class="form-container">
+        <p><strong>Tên tài khoản:</strong> @Model.UserName</p>
+        <div class="form-group">
+            <label for="Name">Tên khách hàng:</label>
+            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { id = "Name" } })
+        </div>
+        <div class="form-group">
+            <label for="Phone">Số điện thoại:</label>
+            @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { id = "Phone" } })
+        </div>
+        <div class="form-group">
+            <label for="Address">Địa chỉ:</label>
+            @Html.EditorFor(m => m.Address, new { htmlAttributes = new { id = "Address" } })
+        </div>
+        <div class="form-group">
+            <label for="City">Thành phố:</label>
+            @Html.EditorFor(m => m.City, new { htmlAttributes = new { id = "City" } })
+        </div>
+        <div class="form-group">
+            <label for="Country">Quốc gia:</label>
+            @Html.EditorFor(m => m.Country, new { htmlAttributes = new { id = "Country" } })
+        </div>
+        <div>
+            <button type="submit"><strong>Lưu </strong></button>
+        </div>
+    </div>
+}

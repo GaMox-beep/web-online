@@ -1,31 +1,135 @@
-﻿
+﻿@model selling_online.Models.ViewModel.RegisterVM
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Đăng ký tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-<link href="~/Content/Custom_Style/Register.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
 
-<main aria-labelledby="title">
-    <div class="register-wrapper">
-        @using (Html.BeginForm("AuthenRegister","Account",FormMethod.Post))
-        { 
-            <h1 id="title">@ViewBag.Title</h1>
-            <div class="input-box">
-                <input type="text" placeholder="Email" />
-                <i class='bx bx-envelope'></i>
-            </div>
+<style>
+    .accountbtn {
+        width: 275px;
+        height: 40px;
+        border: 1px solid #808080;
+        margin: 5px;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: black;
+        color: white;
+    }
 
-            <div class="input-box">
-                <input type="text" placeholder="Username" />
-                <i class="bx bxs-user-rectangle"></i>
-            </div>
-
-            <div class="input-box">
-                <input type="password" placeholder="Password" />
-                <i class='bx bxs-lock-alt'></i>
-            </div>
-            <button type="submit" class="btn">Register</button>
+        .accountbtn hover {
         }
-    </div>
 
-</main>
+    .register-form-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .position-relative {
+        position: relative;
+    }
+
+    .icon-right {
+        position: absolute;
+        top: 50%;
+        right: 10px; /* Điều chỉnh khoảng cách từ bên phải */
+        transform: translateY(-50%);
+        color: #aaa; /* Màu sắc của biểu tượng */
+        pointer-events: none; /* Đảm bảo không ảnh hưởng đến sự kiện click trong input */
+    }
+
+
+
+    .form-horizontal .col-md-4 {
+        width: 100%; /* Đảm bảo tất cả các trường editor chiếm 100% chiều rộng */
+    }
+
+    .form-horizontal .form-group {
+        margin-bottom: 15px; /* Khoảng cách giữa các nhóm input */
+    }
+
+    .form-horizontal {
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 100px;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="register-form-wrapper">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+    <div class="register form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <h2 class="col-md-4" style="margin-bottom:50px;">Đăng ký tài khoản</h2>
+        </div>
+        @* Tên đăng nhập *@
+        <div class="form-group">
+            <div class="col-md-4 position-relative">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên đăng nhập" } })
+                <i class="fa fa-user icon-right"></i>
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @* Mật khẩu *@
+        <div class="form-group">
+            <div class="col-md-4 position-relative">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Mật khẩu" } })
+                <i class="fa fa-lock icon-right"></i>
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @* Xác nhận mật khẩu *@
+        <div class="form-group">
+            <div class="col-md-4 position-relative">
+                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Xác nhận mật khẩu" } })
+                <i class="fa fa-lock icon-right"></i>
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @* Họ tên khách hàng *@
+        <div class="form-group">
+            <div class="col-md-4 position-relative">
+                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", placeholder = "Họ tên khách hàng" } })
+                <i class="fa fa-user icon-right"></i>
+                @Html.ValidationMessageFor(model => model.CustomerName)
+            </div>
+        </div>
+
+        @* Email khách hàng *@
+        <div class="form-group">
+            <div class="col-md-4 position-relative">
+                @Html.EditorFor(model => model.CustomerEmail, new { htmlAttributes = new { @class = "form-control", placeholder = "Email khách hàng" } })
+                <i class="fa fa-envelope icon-right"></i>
+                @Html.ValidationMessageFor(model => model.CustomerEmail)
+            </div>
+        </div>
+
+        @* Địa chỉ khách hàng *@
+        <div class="form-group">
+            <div class="col-md-4 position-relative">
+                @Html.EditorFor(model => model.CustomerAddress, new { htmlAttributes = new { @class = "form-control", placeholder = "Địa chỉ khách hàng" } })
+                <i class="fa fa-map-marker icon-right"></i>
+                @Html.ValidationMessageFor(model => model.CustomerAddress)
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <input type="submit" value="Đăng ký" class="btn btn-info accountbtn" /><br />
+                <p>Bạn Đã Có Tài Khoản? <a href="@Url.Action("Login", "Account", null)">Đăng nhập</a></p>
+            </div>
+        </div>
+    </div>
+    }
+</div>

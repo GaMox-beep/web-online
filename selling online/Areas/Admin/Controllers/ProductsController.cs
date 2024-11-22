@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using selling_online.Models;
+using selling_online.Models.ViewModel;
 
 namespace selling_online.Areas.Admin.Controllers
 {
@@ -15,10 +17,46 @@ namespace selling_online.Areas.Admin.Controllers
         private Database1Entities db = new Database1Entities();
 
         // GET: Admin/Products
-        public ActionResult Index()
+        public ActionResult Index(string searchTerm, decimal? minPrice, decimal? maxPrice, string sortOrder)
         {
+            var model = new SearchProductVM();
             var products = db.Products.Include(p => p.Category);
-            return View(products.ToList());
+
+            if(!string.IsNullOrEmpty(searchTerm) )
+            {
+                products = products.Where(p =>
+                p.ProductName.Contains(searchTerm) ||
+                p.Description.Contains(searchTerm) ||
+                p.Category.CategoryName.Contains(searchTerm));             
+            }
+			if (minPrice.HasValue)
+			{
+				products = products.Where(p => p.Price >= minPrice.Value);
+			}
+			if (maxPrice.HasValue)
+			{
+				products = products.Where(p => p.Price <= maxPrice.Value);
+			}
+			switch (sortOrder)
+			{
+				case "name_asc":
+					products = products.OrderBy(p => p.ProductName);
+					break;
+				case "name_desc":
+					products = products.OrderByDescending(p => p.ProductName);
+					break;
+				case "price_asc":
+					products = products.OrderBy(p => p.Price);
+					break;
+				case "price_desc":
+					products = products.OrderByDescending(p => p.Price);
+					break;
+				default:
+					products = products.OrderBy(p => p.ProductName);
+					break;
+			}
+			model.Products=products.ToList();
+            return View(model);
         }
 
         // GET: Admin/Products/Details/5

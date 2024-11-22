@@ -3,167 +3,232 @@
     ViewBag.Title = "Index2";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model IEnumerable<selling_online.Models.Product>
+@model selling_online.Models.ViewModel.HomeProductVM
 
+<link href="~/Content/Custom_Style/Home/Index2.css" rel="stylesheet" />
 
 <style>
-    /*BANNER*/
-    section#banner {
-        background-image: url(https://images-ext-1.discordapp.net/external/1UMlADt6QgA4YooQmn_5dXUOtw4MsWZlGc_qlhs5fBE/https/file.hstatic.net/1000008082/file/nike_kid_banner_b9197a77637d4bb290e5d8bdea3b0a46.jpg?format=webp&width=1920&height=960);
-        background-size: cover;
-        height: 400px;
-        background-position: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
+    .left-navbar {
+        margin: 0; /* Bỏ margin */
+        padding: 0; /* Bỏ padding */
     }
 
-    div.banner-content h2 {
-        font-size: 36px;
-        color: red;
+    /* Giữ lại viền bao quanh bảng */
+    .table {
+        border-collapse: collapse; /* Kết hợp viền */
+        border: 2px solid #ddd; /* Viền bao quanh toàn bộ bảng */
     }
 
-    #first-hr {
-        border: 2px solid blue;
-        width: 5%;
-       
-    }
-
-    div.banner-content p {
-        color: black;
-        font-weight:bold;
-    }
-
-    .banner-content {
-        text-align: center;
-    }
-
-    .bannner-btn {
-        background-color: black;
-        color: white;
-        padding: 4px 10px;
-        text-decoration: none;
-        font-weight: bold;
-        display: inline-block;
-    }
-    /*CONTENT*/
-    section#content {
-        align-items: center;
-        justify-content: center;
-    }
-
-    div.shop-by-sport h3 {
-        margin: 50px 44px;
-    }
-
-    .sport-content {
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        background-size: cover;
-    }
-
-    .sport-content-item {
-        background-repeat: no-repeat;
-        background-size: cover;
-        width: 500px;
-        height: 400px;
-        background-position: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 40px;
-    }
-
-        .sport-content-item a {
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-            color: white;
+        /* Viền cho ô đầu tiên (thead) */
+        .table thead th {
+            border: none; /* Không viền xung quanh ô header */
+            border-bottom: 2px solid #ddd; /* Viền dưới cho ô header */
         }
 
-    div#running {
-        background-image: url(https://static.nike.com/a/images/f_auto/dpr_0.9,cs_srgb/w_523,c_limit/a3c971bc-bc0a-4c0c-8bdf-e807a3027e53/nike-just-do-it.jpg);
+            /* Viền bên trái và bên phải của bảng */
+            .table thead th:first-child {
+                border-left: 1px solid #ddd; /* Viền bên trái cho ô đầu tiên */
+            }
+
+            .table thead th:last-child {
+                border-right: 1px solid #ddd; /* Viền bên phải cho ô đầu tiên */
+            }
+
+        /* Bỏ viền cho tất cả các ô trong tbody */
+        .table tbody td {
+            border: none; /* Bỏ viền cho các ô */
+            background-color: #f0f0f0;
+            position: relative;
+        }
+        .table tbody a{
+            text-decoration:none;
+            color:black;
+        }
+        .table tbody td:hover {
+            background-color: white; 
+        }
+            
+
+            .table tbody td:hover a {
+                color: black; 
+                padding: 8px;
+            }
+
+
+
+
+
+    .header-column.right-column {
+        text-align: center; /* Giữa hình ảnh và nút */
     }
 
-    div#football {
-        background-image: url(https://static.nike.com/a/images/f_auto/dpr_0.9,cs_srgb/w_523,c_limit/e4695209-3f23-4a05-a9f9-d0edde31b653/nike-just-do-it.jpg);
+    .image-slider {
+        position: relative;
+        width: 100%; /* Chiếm toàn bộ chiều rộng của div */
+        overflow: hidden; /* Ẩn phần thừa nếu có */
+        padding-left:10px;
     }
 
-    div#basketball {
-        background-image: url(https://static.nike.com/a/images/f_auto/dpr_0.9,cs_srgb/h_496,c_limit/5b8b9f97-9905-480a-bb76-2cc0a7471985/nike-just-do-it.jpg);
+        .image-slider img {
+            width: 100%; /* Hình ảnh chiếm toàn bộ chiều rộng của slider */
+            height: auto; /* Chiều cao tự động để giữ tỷ lệ */
+            display: block; /* Bỏ khoảng trắng dưới hình ảnh */
+        }
+
+    .arrow {
+        position: absolute;
+        top: 50%; /* Đưa nút vào giữa chiều dọc */
+        transform: translateY(-50%); /* Giữa chiều dọc */
+        background-color: rgba(255, 255, 255, 0.5); /* Nền bán trong suốt */
+        border: none; /* Bỏ viền */
+        padding: 10px; /* Padding cho nút */
+        cursor: pointer; /* Con trỏ chuột khi di chuột vào nút */
+        font-size: 24px; /* Kích thước chữ */
+        z-index: 10; /* Đảm bảo nút nằm trên bức ảnh */
     }
 
-    #collection-content {
+    .left {
+        left: 10px; /* Khoảng cách từ viền trái */
+    }
+
+    .right {
+        right: 10px; /* Khoảng cách từ viền phải */
+    }
+
+    .arrow:hover {
+        background-color: rgba(255, 255, 255, 1); /* Nền trắng khi hover */
+    }
+
+    .pagination-container {
         display: flex;
-        align-items: center;
         justify-content: center;
-        object-fit: cover;
-        gap: 50px;
+        margin-top: 20px;
     }
 
-        #collection-content h3 {
-            font-size: 14px;
+    .pagination {
+        display: inline-flex;
+        list-style-type: none;
+        padding: 0;
+    }
+
+        .pagination .page-item {
+            margin: 0 5px; /* Khoảng cách giữa các ô vuông */
         }
 
-        #collection-content p {
-            font-size: 12px;
-        }
+            .pagination .page-item a,
+            .pagination .page-item span {
+                display: block;
+                padding: 8px 12px; /* Kích thước ô vuông */
+                border: 1px solid #ddd;
+                color: #333;
+                text-decoration: none;
+                border-radius: 5px; /* Bo tròn các góc ô vuông */
+                min-width: 35px;
+                text-align: center;
+            }
 
-    .collection-item img {
-        width: 400px;
-        height:400px;   
-    }
+                .pagination .page-item.active a,
+                .pagination .page-item a:hover {
+                    background-color: #007bff;
+                    color: white;
+                    border-color: #007bff;
+                }
 
-    .collection-price {
-        font-weight: bold;
-    }
+
+   
 </style>
+<script>
+    let currentIndex = 0;
+    const images = [
+        "https://img.freepik.com/free-vector/special-sale-banner-template-collection_1361-2428.jpg?t=st=1730293917~exp=1730297517~hmac=8324e70e110e37cfbb2fb5f18d85f3bf9a5cc968b31190885f0ea55f54b34822&w=740", // Hình ảnh 1
+        "https://img.freepik.com/free-vector/new-season-sale-banner-template-collection_1361-2429.jpg?t=st=1730294074~exp=1730297674~hmac=82635adefbf20cd80956eeba3a4bb0100c719ffed8908c8a2eb9379c69407920&w=740", // Hình ảnh 2
+        "https://img.freepik.com/free-vector/comb-painting-sale-template-vector-abstract-marketing-social-media-story-fashion-brands_53876-140279.jpg?t=st=1730294092~exp=1730297692~hmac=a80e5b7856c788880f0362b431dc2a86d35580d68999072f78474c42ee8417ae&w=740"  // Hình ảnh 3
+    ];
 
-<section id="banner">
-    <div class="banner-content">
-        <h2>LUXE</h2>
-        @*<hr id="first-hr" />*@
-        <p>Though the human foot can adapt to varied terrains and climate conditions, it is vulnerable, and shoes provide protection. Form was originally tied to function, but over time, shoes also became fashion items.</p>
-        <a href="~/Home/Index" class="bannner-btn">SHOP THE COLLECTIONS <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+    function changeImage(direction) {
+        currentIndex += direction;
+        if (currentIndex < 0) {
+            currentIndex = images.length - 1; // Quay về hình ảnh cuối cùng
+        } else if (currentIndex >= images.length) {
+            currentIndex = 0; // Quay về hình ảnh đầu tiên
+        }
+        document.getElementById("slider-image").src = images[currentIndex];
+    }
+
+</script>
+<body>
+
+    <div class="Home-header">
+        <div class="header-column left-column">
+            <div class="left-navbar">
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th>Loại sản phẩm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="@Url.Action("Index", "Home", new { categoryId = 2 })">Áo</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="@Url.Action("Index", "Home", new { categoryId = 3 })">Quần</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="@Url.Action("Index", "Home", new { categoryId = 1 })">Mũ</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="@Url.Action("Index", "Home")">Tất cả sản phẩm</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="header-column center-column">
+            <section id="banner">
+                <img src="https://i.pinimg.com/564x/89/c5/dc/89c5dc61548e87025ab1c8d3126d3103.jpg" />
+                @Html.Action("_PVCollection", "Home")
+            </section>
+
+        </div>
+        <div class="header-column right-column">
+            <div class="image-slider">
+                <img id="slider-image" src="https://img.freepik.com/free-vector/special-sale-banner-template-collection_1361-2428.jpg?t=st=1730293917~exp=1730297517~hmac=8324e70e110e37cfbb2fb5f18d85f3bf9a5cc968b31190885f0ea55f54b34822&w=740" alt="Image 1" />
+
+                <button class="arrow left" id="prev" onclick="changeImage(-1)">&#10094;</button>
+                <button class="arrow right" id="next" onclick="changeImage(1)">&#10095;</button>
+            </div>
+        </div>
+
+
+
+
     </div>
-</section>
-<section id="content">
-    <div class="sport-content">
-        <div id="running" class="sport-content-item">
-            <a href="#">Running</a>
-        </div>
-        <div id="football" class="sport-content-item">
-            <a href="#">Football</a>
 
-        </div>
-        <div id="basketball" class="sport-content-item">
-            <a href="#">Basketball</a>
-
-        </div>
-    </div>
-
-    <table style="margin: 40px 0; margin-left: auto; margin-right: auto;" id="collection-content-line" cellspacing="10">
-        <tr>
-            <td style="width:47%"><hr /></td>
-            <td style="vertical-align:middle; text-align: center; font-size:20px"><b>Collections</b></td>
-            <td style="width:47%"><hr /></td>
-        </tr>
-    </table>
-
-
-    <div id="collection-content">
-        @foreach (var product in Model)
+    <hr />
+    <section class="container-fluid searchProd">
+        <h2>Tìm kiếm sản phẩm</h2>
+        @using (Html.BeginForm("Index2", "Home", FormMethod.Get))
         {
-            <div class="collection-item">
-                <img src="@product.Image" alt="@product.ProductName" />
-                <h3 class="collection-name">@product.ProductName</h3>
-                <p class="collection-price"><b>@product.Price VND</b></p>
+            <div class="form-group search-container">
+                <div class="search-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                @Html.TextBoxFor(m => m.SearchTerm, new
+                {
+                    @class = "search-input",
+                    placeholder = "Nhập tên, mô tả hoặc chủng loại sản phẩm"
+                })
             </div>
         }
-    </div>
-</section>
+    </section>
+    @Html.Partial("_PVFeaturedProduct", Model)
+    @Html.Partial("_PVNewProduct", Model)
+
+
+
+
+</body>
+
 
 
